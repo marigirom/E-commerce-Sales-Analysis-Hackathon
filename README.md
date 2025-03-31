@@ -71,6 +71,8 @@ FROM SALES_CUSTOMER_INSIGHT
 GROUP BY region
 ORDER BY total_sales DESC;
 ```
+<img width="950" alt="total_sales results by region" src="https://github.com/user-attachments/assets/c61dc104-156d-4bed-8d37-4151d7d23d69" />
+
 
 #### 2. Product Category with Highest Revenue
 ```sql
