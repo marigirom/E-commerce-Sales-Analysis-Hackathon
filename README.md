@@ -529,9 +529,10 @@ Based on these insights, we propose the following strategies for business growth
    - Improve delivery efficiency in regions with higher return rates.  
    - Adjust pricing strategies for shipping fees to enhance affordability and customer satisfaction.  
 
---- 
-Compiled by: Allan Cheruiyot - SALLCH2311
-            Romars Marigi   -  SMARRO2211
+ 
+## Compiled by:
+## Allan Cheruiyot
+## Romars Marigi
 ---
 
 
