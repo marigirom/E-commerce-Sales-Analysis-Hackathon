@@ -216,25 +216,36 @@ df.duplicated().sum()  # No duplicates
 
 ## Key Visualizations
 
-### 1. Sales by Product Category
+### 1.Total Sales by Product Category
 ```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# df is my DataFrame
+
 # Aggregate total sales per category
 category_sales = df.groupby('Category')['Total_Price'].sum().sort_values(ascending=False)
 
 # Plot bar chart
 plt.figure(figsize=(10, 5))
-sns.barplot(x=category_sales.index, y=category_sales.values, palette='viridis')
+sns.barplot(x=category_sales.index, y=category_sales.values, hue=category_sales.index, legend=False, palette='viridis')  # Corrected line
+plt.xticks(rotation=45)
 plt.xlabel("Product Category")
 plt.ylabel("Total Sales")
 plt.title("Total Sales by Product Category")
 plt.show()
 ```
+<img width="934" alt="Total sales by product category" src="https://github.com/user-attachments/assets/269f38eb-6267-49d7-8274-c2672f849cde" />
 
-### 2. Top Products by Revenue
+### 2. Sales Distribution by Region (Pie Chart)
+# Insight: Identify which regions contribute the most to sales.
 ```python
 # Most profitable products
 df.groupby("Product_Name")["Total_Price"].sum().sort_values(ascending=False).head(5)
 ```
+<img width="936" alt="Sales distribution by region" src="https://github.com/user-attachments/assets/aa0fbe82-5fe5-480f-af5a-34182598788f" />
+<img width="932" alt="sales distribution by region1" src="https://github.com/user-attachments/assets/d5d84c6c-fc69-4b70-be9c-167035302631" />
 
 ### 3. Shipping Status Distribution
 ```python
