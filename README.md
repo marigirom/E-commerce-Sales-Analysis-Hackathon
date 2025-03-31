@@ -247,57 +247,154 @@ df.groupby("Product_Name")["Total_Price"].sum().sort_values(ascending=False).hea
 <img width="936" alt="Sales distribution by region" src="https://github.com/user-attachments/assets/aa0fbe82-5fe5-480f-af5a-34182598788f" />
 <img width="932" alt="sales distribution by region1" src="https://github.com/user-attachments/assets/d5d84c6c-fc69-4b70-be9c-167035302631" />
 
-### 3. Shipping Status Distribution
+### 3. Relationship Between Unit Price and Quantity Sold (Scatter Plot)
+# Insight: Check if higher-priced products sell in larger or smaller quantities.
 ```python
-# Plot shipping status counts
-shipping_counts = df['Shipping_Status'].value_counts()
+# Scatter plot
 plt.figure(figsize=(8, 5))
-sns.barplot(x=shipping_counts.index, y=shipping_counts.values, palette='coolwarm')
+sns.scatterplot(data=df, x='Unit_Price', y='Quantity', alpha=0.7)
+plt.xlabel("Unit Price")
+plt.ylabel("Quantity Sold")
+plt.title("Unit Price vs Quantity Sold")
+plt.show()
+```
+<img width="949" alt="Unit price vs Quantity sold " src="https://github.com/user-attachments/assets/823efea3-4945-4fc9-a3c6-f5273deec375" />
+
+### 4. Shipping Status Distribution (Bar Chart)
+# Insight: Understand the proportion of orders delivered, returned, or in transit.
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# df is my DataFrame
+
+shipping_counts = df['Shipping_Status'].value_counts()
+
+plt.figure(figsize=(8, 5))
+sns.barplot(x=shipping_counts.index, y=shipping_counts.values, hue=shipping_counts.index, legend=False, palette='coolwarm')  # Corrected line
 plt.xlabel("Shipping Status")
 plt.ylabel("Number of Orders")
 plt.title("Order Distribution by Shipping Status")
 plt.show()
 ```
+<img width="941" alt="Order distribution by shipping status" src="https://github.com/user-attachments/assets/d06f3bf5-b424-4279-ae16-6cf5d8d196fd" />
 
-### 4. Monthly Sales Trend
+### 5. Sales Distribution by Gender (Bar Chart)
+#Insight: Understand sales performance across different genders.
 ```python
-# Convert date and plot trend
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+gender_sales = df.groupby('Gender')['Total_Price'].sum()
+
+plt.figure(figsize=(6, 4))
+sns.barplot(x=gender_sales.index, y=gender_sales.values, hue=gender_sales.index, legend=False, palette='pastel')  # Corrected line
+plt.xlabel("Gender")
+plt.ylabel("Total Sales")
+plt.title("Sales Distribution by Gender")
+plt.show()
+```
+<img width="932" alt="Sales distribution by gender" src="https://github.com/user-attachments/assets/910e568e-2b9f-4660-bc96-2a196762777b" />
+<img width="945" alt="sales distribution by gender1" src="https://github.com/user-attachments/assets/ceabf3df-8f64-4c9b-beab-f65b649391b7" />
+
+### 6. Quantity Sold by Region (Bar Chart)
+# Insight: Identify which regions have the highest sales volume.
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+region_quantity = df.groupby('Region')['Quantity'].sum().sort_values(ascending=False)
+
+plt.figure(figsize=(8, 5))
+sns.barplot(x=region_quantity.index, y=region_quantity.values, hue=region_quantity.index, legend=False, palette='Set2')  # Corrected line
+plt.xlabel("Region")
+plt.ylabel("Total Quantity Sold")
+plt.title("Quantity Sold by Region")
+plt.show()
+```
+<img width="928" alt="Qantity sold by region" src="https://github.com/user-attachments/assets/17a9a662-4428-4308-b719-6a4229786794" />
+
+### 7. Average Unit Price by Category (Bar Chart)
+# Insight: Compare the average price of products across different categories.
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+category_avg_price = df.groupby('Category')['Unit_Price'].mean().sort_values(ascending=False)
+
+plt.figure(figsize=(10, 5))
+sns.barplot(x=category_avg_price.index, y=category_avg_price.values, hue=category_avg_price.index, legend=False, palette='plasma')  # Corrected line
+plt.xlabel("Category")
+plt.ylabel("Average Unit Price")
+plt.title("Average Unit Price by Category")
+plt.show()
+```
+<img width="941" alt="Average unit price by category" src="https://github.com/user-attachments/assets/b303f153-d647-4fc9-9655-dfd0c307a64b" />
+
+### 8.  Total Price Distribution (Histogram)
+# Insight: Visualize the distribution of total prices to identify common price ranges.
+```python
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8, 5))
+plt.hist(df['Total_Price'], bins=20, color='skyblue', edgecolor='black')
+plt.xlabel("Total Price")
+plt.ylabel("Frequency")
+plt.title("Total Price Distribution")
+plt.show()
+```
+<img width="937" alt="Total price distribution" src="https://github.com/user-attachments/assets/d100e5f6-f49e-4764-8fa3-274c1ddbbb40" />
+
+### 9. Sales Trend Over Time (Line Chart)
+# Insight: Identify sales performance trends over months.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 'df' is my DataFrame with 'Order Date' and 'Total_Price' columns
+
+# Making 'Order Date' to be  in datetime format
 df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
+
+# Set 'Order Date' as index
 df.set_index('Order Date', inplace=True)
-df.resample('ME')['Total_Price'].sum().plot(
-    title='Monthly Sales Trend', 
-    figsize=(10, 5), 
-    marker='o', 
-    color='b'
-)
+
+# Resample data monthly and plot sales trend
+df.resample('M')['Total_Price'].sum().plot(title='Monthly Sales Trend', figsize=(10, 5), marker='o', color='b')
+
 plt.ylabel("Total Sales")
 plt.show()
 ```
+<img width="937" alt="monthly sales trend" src="https://github.com/user-attachments/assets/5c3a373f-3d0d-493f-9461-8c9d56ba6482" />
 
-## Key Findings
-
-### Product Insights
-- Electronics generate highest revenue despite fewer units sold
-- Laptops are most profitable ($696,000 total sales)
-- Monitors are top-selling by quantity (503 units)
-
-### Customer & Regional Insights
+#### 10. Shipping Fee Distribution (Box Plot)
+# Insight: Understand the spread and outliers in shipping fees.
 ```python
-# Check age-spending correlation
-correlation = df['Age'].corr(df['Total_Price'])
-print(f"Correlation between Age and Total Price: {correlation}")  # 0.039
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-# Regional distribution
-region_quantity = df.groupby('Region')['Quantity'].sum().sort_values(ascending=False)
+plt.figure(figsize=(6, 4))
+sns.boxplot(y=df['Shipping_Fee'], color='lightgreen')
+plt.ylabel("Shipping Fee")
+plt.title("Shipping Fee Distribution")
+plt.show()
 ```
-- Minimal correlation between age and spending
-- Sales evenly distributed across regions (West, South, East, North)
-- West region leads slightly in quantity sold
+<img width="926" alt="shipping fee distribution" src="https://github.com/user-attachments/assets/e8dfa53a-085a-474d-9eba-66270d5866bc" />
 
-### Business Metrics
-- High return rate (30.8%) warrants investigation
-- Higher-priced items purchased in smaller quantities
-- No strong seasonal trends identified in monthly sales
+
+### 11.  Correlation between age and total price. 
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+#using seaborn to see the correlation 
+plt.figure(figsize=(8, 5))
+sns.scatterplot(data=df, x='Age', y='Total_Price', alpha=0.7)
+plt.xlabel("Age")
+plt.ylabel("Total Price")
+plt.title("Correlation between Age and Total Price")
+plt.show()
+```
+<img width="944" alt="correlation between age and total price" src="https://github.com/user-attachments/assets/89ea7823-a41e-409a-b0ea-c3a5296d6b99" />
 
 
 ---
