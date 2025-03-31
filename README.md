@@ -150,6 +150,8 @@ SELECT Shipping_Status, COUNT(*) AS Order_Count,
 FROM SALES_CUSTOMER_INSIGHT
 GROUP BY Shipping_Status;
 ```
+<img width="950" alt="order fulfilment rate1" src="https://github.com/user-attachments/assets/ab0349e0-6c46-460b-9119-9e58b3e13cdc" />
+<img width="950" alt="order fulfillment rate calculation" src="https://github.com/user-attachments/assets/35462aae-e184-41f9-8a93-676b80c2a71b" />
 
 #### 8. Fulfillment vs. Return Rate
 ```sql
@@ -168,6 +170,8 @@ SELECT *
 FROM SALES_CUSTOMER_INSIGHT
 ORDER BY CAST(SUBSTRING(Customer_ID, 6) AS UNSIGNED) ASC;
 ```
+<img width="932" alt="sort customer id in ascending order" src="https://github.com/user-attachments/assets/1506c2dc-4e79-4f79-842c-a9e140dc605c" />
+<img width="953" alt="sort customer id in ascending order1" src="https://github.com/user-attachments/assets/60496f15-61d6-4d82-8360-7105e82e5790" />
 
 ---
 
