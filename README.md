@@ -129,7 +129,6 @@ GROUP BY Gender, Product_Name
 ORDER BY Gender, Purchase_Count DESC;
 ```
 <img width="950" alt="most popular product by gender" src="https://github.com/user-attachments/assets/6582e5a5-54c6-4667-a0f0-3b34c2b0b5c9" />
-<img width="956" alt="most popular product by gender1" src="https://github.com/user-attachments/assets/18e97899-f45e-47d5-8c5d-7747807a25ad" />
 
 **Alternative with Ranking:**
 ```sql
@@ -142,6 +141,7 @@ FROM (
 ) ranked 
 WHERE ranking = 1;
 ```
+<img width="956" alt="most popular product by gender1" src="https://github.com/user-attachments/assets/18e97899-f45e-47d5-8c5d-7747807a25ad" />
 
 #### 7. Order Fulfillment Rate
 ```sql
