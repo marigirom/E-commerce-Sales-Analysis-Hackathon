@@ -120,6 +120,7 @@ FROM SALES_CUSTOMER_INSIGHT
 GROUP BY Age_Group
 ORDER BY Total_Spent DESC;
 ```
+<img width="955" alt="Grouping Ages into Ranges" src="https://github.com/user-attachments/assets/d9530f7c-fece-4303-beb8-29224037d2d6" />
 
 #### 6. Most Popular Product by Gender
 ```sql
@@ -151,7 +152,6 @@ FROM SALES_CUSTOMER_INSIGHT
 GROUP BY Shipping_Status;
 ```
 <img width="950" alt="order fulfilment rate1" src="https://github.com/user-attachments/assets/ab0349e0-6c46-460b-9119-9e58b3e13cdc" />
-<img width="950" alt="order fulfillment rate calculation" src="https://github.com/user-attachments/assets/35462aae-e184-41f9-8a93-676b80c2a71b" />
 
 #### 8. Fulfillment vs. Return Rate
 ```sql
@@ -160,6 +160,7 @@ SELECT
     (COUNT(CASE WHEN Shipping_Status = 'Returned' THEN 1 END) * 100.0 / COUNT(*)) AS Return_Rate
 FROM SALES_CUSTOMER_INSIGHT;
 ```
+<img width="950" alt="order fulfillment rate calculation" src="https://github.com/user-attachments/assets/35462aae-e184-41f9-8a93-676b80c2a71b" />
 
 #### 9. Sorting Customer IDs
 ```sql
