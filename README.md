@@ -180,97 +180,114 @@ ORDER BY CAST(SUBSTRING(Customer_ID, 6) AS UNSIGNED) ASC;
 
 ## 4. Python Analysis
 
-### Overview
-This section describes how we used Python (via Jupyter Notebook) to perform additional Exploratory Data Analysis (EDA) and create visualizations to answer our project questions.
+# Sales Data Analysis Project
 
-### Steps in the Python Analysis Process
+## Overview
+Analysis of a 1000-record sales dataset to identify key trends and patterns in customer purchasing behavior.
 
-1. **Connect to the MySQL Database and Load Data:**
-   - **Goal:** Retrieve the cleaned dataset from MySQL into a Pandas DataFrame.
-   
+## Installation
+```python
+# Install required packages
+pip install pandas numpy matplotlib seaborn
+```
 
-2. **Perform Additional EDA:**
-   - **Goal:** Explore the dataset by checking for missing values, summary statistics, and distributions.
-   - **Code:**
-     ```python
-     # Check for missing values
-     missing_values = df.isnull().sum()
-     print("Missing Values:\n", missing_values)
+## Loading and Exploring Data
+```python
+# Import libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-     # Summary statistics of the dataset
-     print(df.describe())
+# Load dataset
+df = pd.read_csv("sales_cleaneddata_from_msql.csv")
 
-     # Grouping sales by region to understand distribution
-     sales_by_region = df.groupby("Region")["Total_Sales"].sum()
-     print("Sales by Region:\n", sales_by_region)
-     ```
-   - **Screenshot:**  
-     
-     *Screenshot showing missing values and summary statistics.*
+# Check data basics
+df.head()
+df.isnull().sum()  # No missing values
+df.duplicated().sum()  # No duplicates
+```
 
-3. **Create Visualizations to Showcase Insights:**
-   - **Visualization 1: Sales Trends Over Time**
-     - **Goal:** Display how sales have changed over time using a line chart.
-     - **Code:**
-       ```python
-       import matplotlib.pyplot as plt
+## Dataset Highlights
+- 1000 sales records with customer info, product details, and shipping data
+- Three product categories: Electronics (47.7%), Accessories (40.1%), Wearables (12.2%)
+- Customer demographics: 52.4% Male, 47.6% Female; Ages 18-69 (avg: 46.9)
+- Shipping statuses: In Transit (32.9%), Delivered (31.3%), Returned (30.8%)
 
-       # Convert Order Date to datetime
-       df['Order_Date'] = pd.to_datetime(df['Order_Date'])
+## Key Visualizations
 
-       # Create a time series plot for sales trends
-       plt.figure(figsize=(12, 6))
-       df.set_index('Order_Date')['Total_Sales'].resample('M').sum().plot()
-       plt.title("Sales Trends Over Time")
-       plt.xlabel("Month")
-       plt.ylabel("Total Sales ($)")
-       plt.show()
-       ```
-     - **Screenshot:**  
-        
-       *Screenshot of the line chart showing sales trends.*
+### 1. Sales by Product Category
+```python
+# Aggregate total sales per category
+category_sales = df.groupby('Category')['Total_Price'].sum().sort_values(ascending=False)
 
-   - **Visualization 2: Distribution of Sales by Product Category**
-     - **Goal:** Visualize the total sales for each product category using a bar chart.
-     - **Code:**
-       ```python
-       # Group data by product category and sum total sales
-       category_sales = df.groupby("Category")["Total_Sales"].sum().sort_values(ascending=False)
+# Plot bar chart
+plt.figure(figsize=(10, 5))
+sns.barplot(x=category_sales.index, y=category_sales.values, palette='viridis')
+plt.xlabel("Product Category")
+plt.ylabel("Total Sales")
+plt.title("Total Sales by Product Category")
+plt.show()
+```
 
-       plt.figure(figsize=(10, 6))
-       category_sales.plot(kind='bar', color='teal')
-       plt.title("Sales by Product Category")
-       plt.xlabel("Product Category")
-       plt.ylabel("Total Sales ($)")
-       plt.xticks(rotation=45)
-       plt.show()
-       ```
-     - **Screenshot:**  
-       
-       *Screenshot of the bar chart for product category sales.*
+### 2. Top Products by Revenue
+```python
+# Most profitable products
+df.groupby("Product_Name")["Total_Price"].sum().sort_values(ascending=False).head(5)
+```
 
-   - **Visualization 3: Correlation Between Age and Total Price**
-     - **Goal:** Analyze the relationship between customer age and total purchase amount with a scatter plot.
-     - **Code:**
-       ```python
-       import seaborn as sns
+### 3. Shipping Status Distribution
+```python
+# Plot shipping status counts
+shipping_counts = df['Shipping_Status'].value_counts()
+plt.figure(figsize=(8, 5))
+sns.barplot(x=shipping_counts.index, y=shipping_counts.values, palette='coolwarm')
+plt.xlabel("Shipping Status")
+plt.ylabel("Number of Orders")
+plt.title("Order Distribution by Shipping Status")
+plt.show()
+```
 
-       plt.figure(figsize=(8, 6))
-       sns.scatterplot(x='Age', y='Total_Sales', data=df, alpha=0.6)
-       plt.title("Correlation Between Age and Total Sales")
-       plt.xlabel("Age")
-       plt.ylabel("Total Sales ($)")
-       plt.show()
-       ```
-     - **Screenshot:**  
-      
-       *Screenshot of the scatter plot showing the correlation between age and total sales.*
+### 4. Monthly Sales Trend
+```python
+# Convert date and plot trend
+df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
+df.set_index('Order Date', inplace=True)
+df.resample('ME')['Total_Price'].sum().plot(
+    title='Monthly Sales Trend', 
+    figsize=(10, 5), 
+    marker='o', 
+    color='b'
+)
+plt.ylabel("Total Sales")
+plt.show()
+```
 
-4. **Save Your Python Scripts:**
-   - **File:** The complete Python analysis is saved in `Python_Analysis_Scripts.ipynb`.
-   - **Note:** This notebook includes all the steps above, along with additional exploration as needed.
+## Key Findings
 
----
+### Product Insights
+- Electronics generate highest revenue despite fewer units sold
+- Laptops are most profitable ($696,000 total sales)
+- Monitors are top-selling by quantity (503 units)
+
+### Customer & Regional Insights
+```python
+# Check age-spending correlation
+correlation = df['Age'].corr(df['Total_Price'])
+print(f"Correlation between Age and Total Price: {correlation}")  # 0.039
+
+# Regional distribution
+region_quantity = df.groupby('Region')['Quantity'].sum().sort_values(ascending=False)
+```
+- Minimal correlation between age and spending
+- Sales evenly distributed across regions (West, South, East, North)
+- West region leads slightly in quantity sold
+
+### Business Metrics
+- High return rate (30.8%) warrants investigation
+- Higher-priced items purchased in smaller quantities
+- No strong seasonal trends identified in monthly sales
+
 
 ---
 
