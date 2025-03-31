@@ -82,6 +82,7 @@ GROUP BY Category
 ORDER BY Total_Revenue DESC
 LIMIT 1;
 ```
+<img width="950" alt="product category that generates the highest revenue" src="https://github.com/user-attachments/assets/345f3378-4e71-4fa2-a23f-9c9efd43f75c" />
 
 #### 3. Average Shipping Fee by Region
 ```sql
@@ -90,6 +91,7 @@ FROM SALES_CUSTOMER_INSIGHT
 GROUP BY Region
 ORDER BY Avg_Shipping_Fee DESC;
 ```
+<img width="950" alt="average shipping fee by region" src="https://github.com/user-attachments/assets/de0e047a-2565-4363-bd9e-b9bb178638a5" />
 
 #### 4. Customer Age Impact on Purchasing Behavior
 ```sql
@@ -98,6 +100,10 @@ FROM SALES_CUSTOMER_INSIGHT
 GROUP BY Age
 ORDER BY Total_Spent DESC;
 ```
+<img width="953" alt="how customer age impact purchasing power" src="https://github.com/user-attachments/assets/9c7fb61b-e67f-44e3-a269-a4ed1fa245c0" />
+<img width="953" alt="how customer age impact purchasing power1" src="https://github.com/user-attachments/assets/337188d0-e8e2-4e3b-a279-d3958546e768" />
+<img width="955" alt="how customer age impact purchasing power2" src="https://github.com/user-attachments/assets/d6e548cb-ebda-4387-8113-1a5769f71ac7" />
+<img width="950" alt="how customer age impact purchasing power3" src="https://github.com/user-attachments/assets/acc59f9a-bb24-4770-a42b-0bbb73848f6b" />
 
 #### 5. Grouping Ages into Ranges
 ```sql
