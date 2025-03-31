@@ -395,6 +395,38 @@ plt.show()
 ```
 <img width="944" alt="correlation between age and total price" src="https://github.com/user-attachments/assets/89ea7823-a41e-409a-b0ea-c3a5296d6b99" />
 
+### 12  correlation matrix
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Select only numeric columns
+numeric_df = df.select_dtypes(include=['number'])
+
+# Compute correlation matrix
+corr_matrix = numeric_df.corr()
+
+# Plot heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
+plt.title("Correlation Matrix")
+plt.show()
+```
+<img width="955" alt="correlation matrix" src="https://github.com/user-attachments/assets/048b5f79-4b44-4bb9-8651-2a55e78cf943" />
+
+### 13.  Box plot for numerical variables
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+# Boxplot for outlier detection
+numerical_cols = ['Unit_Price', 'Quantity', 'Total_Price', 'Shipping_Fee']
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=df[numerical_cols])
+plt.title("Boxplot of Numerical Variables")
+plt.show()
+```
+<img width="941" alt="box plot for numerical variables" src="https://github.com/user-attachments/assets/c37911d0-7fe0-46f7-a76e-37abad9f9966" />
+
 ---
 
 ## 5. Power BI Dashboard
