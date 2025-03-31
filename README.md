@@ -1,6 +1,6 @@
-# E-commerce Sales Data Analysis
+# E-commerce Sales Analysis Hackathon
 
-This project involves analyzing e-commerce sales data through data cleaning in Excel and SQL, performing SQL queries to extract insights, conducting further analysis using Python, and visualizing the results with Power BI.
+This project is of hackathon participation that requires analyzing e-commerce sales data through data cleaning in Excel and SQL, performing SQL queries to extract data insights, conducting further analysis using Python, and visualizing the results with Power BI.
 
 ---
 
@@ -18,7 +18,7 @@ This project involves analyzing e-commerce sales data through data cleaning in E
 ## 1. Introduction
 
 ### Overview
-This dataset contains sales transactions from an e-commerce platform. It includes customer demographics, order details, pricing, shipping status, and order dates.
+The dataset contains sales transactions from an e-commerce platform. It includes customer demographics, order details, pricing, shipping status, and order dates.
 
 ### Purpose of the Analysis
 - Analyze total sales by region.
@@ -529,8 +529,10 @@ Based on these insights, we propose the following strategies for business growth
    - Improve delivery efficiency in regions with higher return rates.  
    - Adjust pricing strategies for shipping fees to enhance affordability and customer satisfaction.  
 
-  
-
+--- 
+Compiled by: Allan Cheruiyot - SALLCH2311
+            Romars Marigi   -  SMARRO2211
 ---
+
 
 
