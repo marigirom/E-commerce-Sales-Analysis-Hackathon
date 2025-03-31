@@ -293,7 +293,69 @@ region_quantity = df.groupby('Region')['Quantity'].sum().sort_values(ascending=F
 
 ## 5. Power BI Dashboard
 
-### (To be added: Visual representation of sales insights and key performance indicators.)
+### Overview
+Using Power BI, we built an interactive dashboard that aggregates key metrics from our e-commerce sales data. The dashboard includes insights on total sales, revenue by product category, shipping status, and more. It is designed to be user-friendly and visually appealing, with various visualizations such as maps, bar charts, and pie charts. The dashboard has been published to Power BI Service, and a link to the live dashboard is provided below.
+
+**Dashboard Link:** [View Live Power BI Dashboard](https://app.powerbi.com/your-dashboard-link)
+
+---
+
+### 5.1 Customer Sales Report
+
+**Description:**  
+This page provides an overall view of customer sales performance. It includes:
+- **Key Metrics:** Total sales, total orders, and average order value.
+- **Visualizations:** A combination of KPI cards and a bar chart displaying total sales by region.
+- **Insight:** Quickly identifies regions with the highest sales, enabling targeted strategies.
+
+**Screenshot:**  
+![Customer Sales](https://github.com/user-attachments/assets/e8a38f1b-db29-496c-b98b-975b714f0dd1)
+
+---
+
+### 5.2 Customer Insights
+
+**Description:**  
+This page focuses on customer demographics and purchasing behavior. It includes:
+- **Visualizations:**  
+  - Sales by age group using a clustered bar chart.
+  - Sales by gender using a pie chart.
+- **Insight:** Highlights how different customer segments contribute to overall revenue, allowing for more targeted marketing efforts.
+
+**Screenshot:**  
+![Customer Insights](https://github.com/user-attachments/assets/643f73d7-fba5-4b11-917f-c34ba4536ea5)
+
+---
+
+### 5.3 Product Performance
+
+**Description:**  
+This page analyzes product-related metrics. It features:
+- **Visualizations:**  
+  - A bar chart displaying total sales by product category and region.
+  - A detailed view of top-performing products.
+- **Insight:** Helps identify which product categories are driving revenue and how regional performance varies.
+
+**Screenshot:**  
+![Product Performance](https://github.com/user-attachments/assets/fac436f7-93be-4361-8dba-01c02354de0f)
+
+---
+
+### 5.4 Shipping Analysis
+
+**Description:**  
+This page evaluates the shipping performance and operational efficiency. It includes:
+- **Visualizations:**  
+  - A line chart showing delivery date trends.
+  - A bar chart depicting delivery status by region.
+  - A pie chart representing shipping fees by region.
+- **Insight:** Provides a comprehensive view of order fulfillment and shipping cost distribution, highlighting potential areas for logistics improvement.
+
+**Screenshot:**  
+![Shipping insights](https://github.com/user-attachments/assets/fd2268b5-ab71-41ac-a41e-ebfa0b7b96d3)
+
+
+
 
 ---
 
