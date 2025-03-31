@@ -171,9 +171,101 @@ ORDER BY CAST(SUBSTRING(Customer_ID, 6) AS UNSIGNED) ASC;
 
 ---
 
+---
+
 ## 4. Python Analysis
 
-### (To be added: Exploratory Data Analysis and Visualization using Python.)
+### Overview
+This section describes how we used Python (via Jupyter Notebook) to perform additional Exploratory Data Analysis (EDA) and create visualizations to answer our project questions.
+
+### Steps in the Python Analysis Process
+
+1. **Connect to the MySQL Database and Load Data:**
+   - **Goal:** Retrieve the cleaned dataset from MySQL into a Pandas DataFrame.
+   
+
+2. **Perform Additional EDA:**
+   - **Goal:** Explore the dataset by checking for missing values, summary statistics, and distributions.
+   - **Code:**
+     ```python
+     # Check for missing values
+     missing_values = df.isnull().sum()
+     print("Missing Values:\n", missing_values)
+
+     # Summary statistics of the dataset
+     print(df.describe())
+
+     # Grouping sales by region to understand distribution
+     sales_by_region = df.groupby("Region")["Total_Sales"].sum()
+     print("Sales by Region:\n", sales_by_region)
+     ```
+   - **Screenshot:**  
+     
+     *Screenshot showing missing values and summary statistics.*
+
+3. **Create Visualizations to Showcase Insights:**
+   - **Visualization 1: Sales Trends Over Time**
+     - **Goal:** Display how sales have changed over time using a line chart.
+     - **Code:**
+       ```python
+       import matplotlib.pyplot as plt
+
+       # Convert Order Date to datetime
+       df['Order_Date'] = pd.to_datetime(df['Order_Date'])
+
+       # Create a time series plot for sales trends
+       plt.figure(figsize=(12, 6))
+       df.set_index('Order_Date')['Total_Sales'].resample('M').sum().plot()
+       plt.title("Sales Trends Over Time")
+       plt.xlabel("Month")
+       plt.ylabel("Total Sales ($)")
+       plt.show()
+       ```
+     - **Screenshot:**  
+        
+       *Screenshot of the line chart showing sales trends.*
+
+   - **Visualization 2: Distribution of Sales by Product Category**
+     - **Goal:** Visualize the total sales for each product category using a bar chart.
+     - **Code:**
+       ```python
+       # Group data by product category and sum total sales
+       category_sales = df.groupby("Category")["Total_Sales"].sum().sort_values(ascending=False)
+
+       plt.figure(figsize=(10, 6))
+       category_sales.plot(kind='bar', color='teal')
+       plt.title("Sales by Product Category")
+       plt.xlabel("Product Category")
+       plt.ylabel("Total Sales ($)")
+       plt.xticks(rotation=45)
+       plt.show()
+       ```
+     - **Screenshot:**  
+       
+       *Screenshot of the bar chart for product category sales.*
+
+   - **Visualization 3: Correlation Between Age and Total Price**
+     - **Goal:** Analyze the relationship between customer age and total purchase amount with a scatter plot.
+     - **Code:**
+       ```python
+       import seaborn as sns
+
+       plt.figure(figsize=(8, 6))
+       sns.scatterplot(x='Age', y='Total_Sales', data=df, alpha=0.6)
+       plt.title("Correlation Between Age and Total Sales")
+       plt.xlabel("Age")
+       plt.ylabel("Total Sales ($)")
+       plt.show()
+       ```
+     - **Screenshot:**  
+      
+       *Screenshot of the scatter plot showing the correlation between age and total sales.*
+
+4. **Save Your Python Scripts:**
+   - **File:** The complete Python analysis is saved in `Python_Analysis_Scripts.ipynb`.
+   - **Note:** This notebook includes all the steps above, along with additional exploration as needed.
+
+---
 
 ---
 
